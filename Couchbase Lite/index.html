@@ -19,24 +19,153 @@
 -->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.min.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World!</title>
+        <title>Todo Lite</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
+        <div id="content"></div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/zepto.min.js"></script>
+        <script type="text/javascript" src="js/zepto.touch.js"></script>
+        <script type="text/javascript" src="js/modules.js"></script>
+        <script type="text/javascript" src="js/phonegap.facebook.inappbrowser.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+<!-- mustache templates -->
+<script type="text/mustache" id="index-mu">
+<header>
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item left quarter todo-padded">
+            &nbsp;
+        </div>
+        <div class="topcoat-navigation-bar__item center half">
+            <h1 class="topcoat-navigation-bar__title">Todo Lite</h1>
+        </div>
+        <div class="topcoat-navigation-bar__item right quarter todo-padded">
+            <button class="todo-login topcoat-button todo-small">&#9786;</button>
+        </div>
+    </div>
+    <div class="topcoat-navigation-bar">
+        <form>
+            <input type="text" class="topcoat-text-input" name="title" value="" placeholder="Name your list">
+        </form>
+    </div>
+</header>
+<div id="scrollable">
+</div>
+</script>
+<script type="text/mustache" id="indexList-mu">
+<div class="topcoat-list__container">
+    <ul class="topcoat-list">
+    {{#rows}}
+        <li class="todo-list-name topcoat-list__item" data-id="{{id}}">
+            {{value}}
+            <button class="todo-delete topcoat-button">Delete</button>
+        </li>
+    {{/rows}}
+    </ul>
+</div>
+</script>
+<script type="text/mustache" id="list-mu">
+<header>
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item left quarter todo-padded">
+            <button class="todo-index topcoat-button todo-small">&larr;</button>
+        </div>
+        <div class="topcoat-navigation-bar__item center half">
+            <h1 class="topcoat-navigation-bar__title">{{title}}</h1>
+        </div>
+        <div class="topcoat-navigation-bar__item right quarter todo-padded">
+            <button class="todo-share topcoat-button todo-small">&#9786;</button>
+        </div>
+    </div>
+    <div class="topcoat-navigation-bar">
+        <form>
+            <input type="text" class="topcoat-text-input" name="title" value="" placeholder="Add a task">
+        </form>
+    </div>
+</header>
+<div id="scrollable">
+</div>
+</script>
+<script type="text/mustache" id="listItems-mu">
+<div class="topcoat-list__container">
+    <ul class="topcoat-list">
+    {{#rows}}
+        <li class="topcoat-list__item" data-id="{{id}}">
+        {{#value}}
+            <label class="todo-list-item topcoat-checkbox__label">
+
+                    <input {{checked}} type="checkbox">
+                    <div class="topcoat-checkbox"></div>
+                    {{title}}
+            </label>
+            <div class="camera {{#image}}image{{/image}}"></div>
+            <button class="todo-delete topcoat-button">Delete</button>
+            <br class="clear"/>
+        {{/value}}
+        </li>
+    {{/rows}}
+    </ul>
+</div>
+</script>
+<script type="text/mustache" id="share-mu">
+<header>
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">{{title}}</h1>
+        </div>
+    </div>
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item left quarter todo-padded">
+            <button class="todo-share-back topcoat-button todo-small">&larr;</button>
+        </div>
+        <div class="topcoat-navigation-bar__item center half">
+            <h2 class="topcoat-navigation-bar__title todo-unbold">Sharing</h2>
+        </div>
+    </div>
+</header>
+<div id="scrollable">
+    <div class="topcoat-list__container">
+        <ul class="topcoat-list" id="share-list">
+        {{#rows}}
+            <li class="topcoat-list__item" data-id="{{id}}">
+                <label class="topcoat-checkbox__label">
+                        <input {{checked}} type="checkbox">
+                        <div class="topcoat-checkbox"></div>
+                        {{key}}
+                </label>
+            </li>
+        {{/rows}}
+        </ul>
+    </div>
+</div>
+</script>
+<script type="text/mustache" id="image-mu">
+<header>
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">{{title}}</h1>
+        </div>
+    </div>
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item left quarter todo-padded">
+            <button class="todo-image-back topcoat-button todo-small">&larr;</button>
+        </div>
+        <div class="topcoat-navigation-bar__item center half">
+            <h2 class="topcoat-navigation-bar__title todo-unbold">Image</h2>
+        </div>
+        <div class="topcoat-navigation-bar__item right quarter todo-padded">
+            <button class="todo-image-del topcoat-button todo-small">&#9746;</button>
+        </div>
+    </div>
+</header>
+<div id="scrollable">
+    <img src="{{image_path}}" class="todo-image" />
+</div>
+</script>
     </body>
 </html>
