@@ -2,10 +2,10 @@
     "ProjectName": "Couchbase Lite"
     ,"ProjectGuid": "af7bb05a-e98b-4d99-9057-6de528538cf4"
     ,"projectVersion": 1
-    ,"AppIdentifier": "com.telerik.CouchbaseLite"
+    ,"AppIdentifier": "com.telerik.plugindemo.couchbaselite"
     ,"DisplayName": "Couchbase Lite"
-    ,"Author": ""
-    ,"Description": ""
+    ,"Author": "Telerik"
+    ,"Description": "Couchbase-Lite-DemoApp"
     ,"BundleVersion": "1.0"
     ,"AndroidVersionCode": "1"
     ,"iOSDeviceFamily": [
