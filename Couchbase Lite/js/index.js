@@ -28,8 +28,9 @@ document.addEventListener("deviceready", onDeviceReady, false)
 // This cloud based sync server is not available at the moment of testing this plugin..
 // var REMOTE_SYNC_URL = "http://sync.couchbasecloud.com:4984/todos";
 
-// .. so I installed my own locally, which you can do too by following these instructions: https://github.com/couchbase/sync_gateway
-// .. and running the server like this './sync_gateway sync-gateway-config.json' where the json file is the one in this demo project.
+// .. so I installed my own locally, which you can do too by downloading the Sync Gateway: http://www.couchbase.com/download#cb-mobile (scroll down a bit)
+// or following these instructions to built it from source: https://github.com/couchbase/sync_gateway,
+// and running the server like this './sync_gateway sync-gateway-config.json' where the json file is the one in this demo project.
 var REMOTE_SYNC_URL = "http://10.0.1.12:4984/todos"
 
 /*
