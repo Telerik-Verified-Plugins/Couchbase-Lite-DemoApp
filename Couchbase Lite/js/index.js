@@ -17,17 +17,20 @@
  * under the License.
  */
 
-
 var coax = require("coax"),
     fastclick = require("fastclick"),
-    appDbName = "todo"
+    appDbName = "todos"
 
 new fastclick.FastClick(document.body)
 
 document.addEventListener("deviceready", onDeviceReady, false)
 
-// var REMOTE_SYNC_URL = "http://10.0.1.12:4984/todos/"
-var REMOTE_SYNC_URL = "http://sync.couchbasecloud.com:4984/todos4"
+// This cloud based sync server is not available at the moment of testing this plugin..
+// var REMOTE_SYNC_URL = "http://sync.couchbasecloud.com:4984/todos";
+
+// .. so I installed my own locally, which you can do too by following these instructions: https://github.com/couchbase/sync_gateway
+// .. and running the server like this './sync_gateway sync-gateway-config.json' where the json file is the one in this demo project.
+var REMOTE_SYNC_URL = "http://10.0.1.12:4984/todos"
 
 /*
 Initialize the app, connect to the database, draw the initial UI
@@ -39,13 +42,13 @@ Initialize the app, connect to the database, draw the initial UI
 function onDeviceReady() {
     setupConfig(function(err){
         if (err) {
-            alert(err)
+            alert("err "+JSON.stringify(err))
             return console.log("err "+JSON.stringify(err))
         }
         connectToChanges()
         goIndex()
         triggerSync(function(err) {
-            if (err) {console.log("error on sync"+ JSON.stringify(err))}
+            if (err) {alert("error on sync"+ JSON.stringify(err))}
         })
     });
     navigator.splashscreen.hide();
@@ -566,8 +569,10 @@ the config setup is stored in `window.config` for easy access.
 
 function setupConfig(done) {
     // get CBL url
-    if (!window.cblite) {
-        return done('Couchbase Lite not installed')
+    if (window.navigator.simulator === true) {
+        return done('This plugin is not available in the simulator.');
+    } else if (!window.cblite) {
+        return done('Couchbase Lite not installed. Maybe you are running in AppBuilder Companion app which currently does not support this plugin.');
     }
 
     var mustache = require("mustache"),
