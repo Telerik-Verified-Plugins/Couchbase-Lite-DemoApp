@@ -25,13 +25,13 @@ new fastclick.FastClick(document.body)
 
 document.addEventListener("deviceready", onDeviceReady, false)
 
-// This cloud based sync server is not available at the moment of testing this plugin..
-// var REMOTE_SYNC_URL = "http://sync.couchbasecloud.com:4984/todos";
+// This cloud based sync server may no longer be available when you're testing this app (it is at the moment of writing), so..
+var REMOTE_SYNC_URL = "http://demo.sc.couchbase.com/todolite";
 
-// .. so I installed my own locally, which you can do too by downloading the Sync Gateway: http://www.couchbase.com/download#cb-mobile (scroll down a bit)
-// or following these instructions to built it from source: https://github.com/couchbase/sync_gateway,
-// and running the server like this './sync_gateway sync-gateway-config.json' where the json file is the one in this demo project.
-var REMOTE_SYNC_URL = "http://10.0.1.12:4984/todos"
+// .. if you need to install your own local sync server, you can download the Sync Gateway here: http://www.couchbase.com/download#cb-mobile (scroll down a bit)
+// and run the server like this './sync_gateway sync-gateway-config.json' where the json file is the one in this demo project.
+// Then change the line above by this one (change the IP address to your own IP address or domain name):
+// var REMOTE_SYNC_URL = "http://10.0.1.12:4984/todos"
 
 /*
 Initialize the app, connect to the database, draw the initial UI
