@@ -589,7 +589,7 @@ function setupConfig(done) {
         console.log("getURL: " + JSON.stringify([err, url]))
         if (err) {return done(err)}
 
-        if (device.platform.toLowerCase() === "android") {
+        if (!/Apple/.test(navigator.userAgent)) {
             // this helps on Android < 4.4
             // otherwise basic auth doesn't work
             var xmlHttp = new XMLHttpRequest()
@@ -655,6 +655,7 @@ function setupConfig(done) {
 
     function setupDb(db, cb) {
         db.get(function(err, res, body){
+            console.log(JSON.stringify(["before create db put", err, res, body]))
             db.put(function(err, res, body){
                 db.get(cb)
             })
