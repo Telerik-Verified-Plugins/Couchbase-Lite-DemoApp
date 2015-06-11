@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.couchbase.lite.phonegap" version="1.0.4">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.couchbase.lite.phonegap" version="1.0.5">
   <name>Couchbase Lite</name>
   <description>Install Couchbase Lite in your app to enable JSON sync.</description>
   <license>Apache 2.0</license>
@@ -9,6 +9,8 @@
   <asset src="www/cblite-example.html" target="cblite-example.html"/>
   <engines>
     <engine name="cordova" version=">=3.0.0"/>
+    <!-- needed for gradleReference support -->
+    <engine name="cordova-plugman" version=">=4.2.0"/>
   </engines>
   <platform name="ios">
     <config-file target="config.xml" parent="/widget">
@@ -72,5 +74,7 @@
     <source-file src="lib/android/servlet-2-3.jar" target-dir="libs"/>
     <source-file src="lib/android/stateless4j-2.4.0.jar" target-dir="libs"/>
     <source-file src="lib/android/webserver-2-3.jar" target-dir="libs"/>
+
+    <framework src="src/android/cblite.gradle" custom="true" type="gradleReference" />
   </platform>
 </plugin>
