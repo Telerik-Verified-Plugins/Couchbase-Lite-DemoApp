@@ -28,7 +28,8 @@
     "cordova-plugin-dialogs",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "cordova-plugin-vibration"
+    "cordova-plugin-vibration",
+    "com.couchbase.lite.phonegap@1.0.5"
   ],
   "AndroidPermissions": [
     "android.permission.ACCESS_COARSE_LOCATION",
