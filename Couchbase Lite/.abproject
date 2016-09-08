@@ -6,7 +6,7 @@
   "DisplayName": "Couchbase Lite plugin demo",
   "Author": "Telerik",
   "Description": "Couchbase Lite",
-  "BundleVersion": "1.0",
+  "BundleVersion": "1.0.1",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -20,16 +20,15 @@
   "WP8PublisherID": "{5e9a20dc-9a6e-4951-b773-084f56faef48}",
   "WP8ProductID": "{0613d0fb-0d00-4726-87f3-061cd7e44eab}",
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
-  "FrameworkVersion": "4.0.0",
+  "FrameworkVersion": "5.0.0",
   "CorePlugins": [
     "cordova-plugin-console",
-    "cordova-plugin-crosswalk-webview@1.2.0",
     "cordova-plugin-device",
     "cordova-plugin-dialogs",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-vibration",
-    "com.couchbase.lite.phonegap@1.0.5"
+    "com.couchbase.lite.phonegap@1.3.0"
   ],
   "AndroidPermissions": [
     "android.permission.ACCESS_COARSE_LOCATION",
@@ -65,5 +64,6 @@
   "Framework": "Cordova",
   "WP8WindowsPublisherName": "CN=Telerik",
   "WP8PackageIdentityName": "1234Telerik.com.telerik.plugindemo.couchbaselite",
-  "CordovaPluginVariables": {}
+  "CordovaPluginVariables": {},
+  "iOSDeploymentTarget": "7.0"
 }
